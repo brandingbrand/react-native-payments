@@ -1,6 +1,6 @@
 require "json"
 
-package = JSON.parse(File.read(File.join(__dir__, "../../package.json")))
+package = JSON.parse(File.read(File.join(__dir__, "./package.json")))
 version = package["version"]
 giturl = package["repository"]
 
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.author       = "Naoufal Kadhom"
   s.platform     = :ios, "7.0"
   s.source       = { :git => giturl + ".git", :tag => version }
-  s.source_files  = "*.{h,m}"
+  s.source_files   = 'ios/*.{h,m}'
   s.requires_arc = true
 
 

@@ -85,4 +85,7 @@ declare module '@brandingbrand/react-native-payments' {
     new(methodData: PaymentMethodData[], details: PaymentDetailsInit, options?: PaymentOptions): PaymentRequest;
   };
 
+  export declare var ApplePayButton: {
+    new(props: any);
+  }
 }
