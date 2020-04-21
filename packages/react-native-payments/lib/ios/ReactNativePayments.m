@@ -90,6 +90,13 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
     callback(@[[NSNull null]]);
 }
 
+RCT_EXPORT_METHOD(openPaymentSetup: (RCTResponseSenderBlock)callback) {
+    PKPassLibrary* lib = [[PKPassLibrary alloc] init];
+    [lib openPaymentSetup];
+
+    callback(@[[NSNull null]]);
+}
+
 
 -(void) paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
