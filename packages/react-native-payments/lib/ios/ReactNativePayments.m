@@ -83,6 +83,8 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
 {
     if ([paymentStatus isEqualToString: @"success"]) {
         self.completion(PKPaymentAuthorizationStatusSuccess);
+    } else if ([paymentStatus isEqualToString: @"invalidShipping"]) {
+        self.completion(PKPaymentAuthorizationStatusInvalidShippingPostalAddress);
     } else {
         self.completion(PKPaymentAuthorizationStatusFailure);
     }
