@@ -1,6 +1,6 @@
 {
   "name": "@brandingbrand/react-native-payments",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "scripts": {
     "run:packager": "cd examples/native && yarn run:packager",
     "run:ios": "cd examples/native && yarn run:ios",
