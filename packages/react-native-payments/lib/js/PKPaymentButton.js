@@ -67,7 +67,7 @@ export class PKPaymentButton extends React.Component<Props> {
 
   render() {
     const { defaultToSetup } = this.state;
-    const buttonType = defaultToSetup ? 'setUp' : this.props.buttonType;
+    const buttonType = defaultToSetup ? 'setUp' : this.props.type;
     const onPress = defaultToSetup ? PaymentRequest.openPaymentSetup : this.props.onPress;
     return (
       <RNPKPaymentButton

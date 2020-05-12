@@ -16,7 +16,7 @@ const NativePayments: {
   show: () => Promise<any>,
   abort: () => Promise<any>,
   complete: PaymentComplete => Promise<any>,
-  availableNetworks: () => Promise<any>,
+  availableNetworks: () => Promise<string[] | boolean>,
   getFullWalletAndroid: string => Promise<any>
 } = {
   supportedGateways: IS_ANDROID
