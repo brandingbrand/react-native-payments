@@ -98,7 +98,7 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
 }
 
 RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
-                  invalidShipping: (BOOL)invalidShipping // MODIFIED
+                  invalidShipping: (BOOL)invalidShipping
                   callback: (RCTResponseSenderBlock)callback)
 
 {
