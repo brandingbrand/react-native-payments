@@ -117,6 +117,7 @@ export default class PaymentRequest {
   _userAcceptSubscription: any; // TODO: - add proper type annotation
   _gatewayErrorSubscription: any; // TODO: - add proper type annotation
   _shippingAddressChangesCount: number;
+  _invalidShippingAddress: boolean;
 
   _shippingAddressChangeFn: PaymentRequestUpdateEvent => void; // function provided by user
   _shippingOptionChangeFn: PaymentRequestUpdateEvent => void; // function provided by user
@@ -206,6 +207,7 @@ export default class PaymentRequest {
     // Set the amount of times `_handleShippingAddressChange` has been called.
     // This is used on iOS to noop the first call.
     this._shippingAddressChangesCount = 0;
+    this._invalidShippingAddress = false;
 
     const platformMethodData = getPlatformMethodData(methodData, Platform.OS);
     const normalizedDetails = convertDetailAmountsToString(details);

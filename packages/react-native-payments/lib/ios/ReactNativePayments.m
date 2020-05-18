@@ -98,6 +98,7 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
 }
 
 RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
+                  invalidShipping: (BOOL)invalidShipping // MODIFIED
                   callback: (RCTResponseSenderBlock)callback)
 
 {
@@ -131,6 +132,12 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
                                                   shippingMethods,
                                                   paymentSummaryItems
                                                   );
+        } else if (invalidShipping == true) {
+            return self.shippingContactCompletion(
+                                                  PKPaymentAuthorizationStatusInvalidShippingPostalAddress,
+                                                  shippingMethods,
+                                                  paymentSummaryItems
+                                                  );
         } else {
             self.shippingContactCompletion(
                                            PKPaymentAuthorizationStatusSuccess,
@@ -145,7 +152,7 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
     
     // Call callback
     callback(@[[NSNull null]]);
-    
+
 }
 
 // DELEGATES

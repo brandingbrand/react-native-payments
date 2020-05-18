@@ -122,7 +122,7 @@ export default class PaymentRequestUpdateEvent {
     // ---------------------------------
     const normalizedDetails = convertDetailAmountsToString(target._details);
     return (
-      NativePayments.handleDetailsUpdate(normalizedDetails, DOMException)
+      NativePayments.handleDetailsUpdate(normalizedDetails, this.target._invalidShippingAddress, DOMException)
         // 14. Upon fulfillment of detailsPromise with value value
         .then(this._resetEvent())
         // On iOS the `selectedShippingMethod` defaults back to the first option

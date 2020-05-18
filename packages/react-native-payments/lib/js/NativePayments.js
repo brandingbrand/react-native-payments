@@ -77,7 +77,7 @@ const NativePayments: {
     });
   },
 
-  handleDetailsUpdate(details) {
+  handleDetailsUpdate(details, invalidShippingAddress) {
     return new Promise((resolve, reject) => {
       // Android doesn't have display items, so we noop.
       // Users need to create a new Payment Request if they
@@ -88,7 +88,7 @@ const NativePayments: {
         return;
       }
 
-      ReactNativePayments.handleDetailsUpdate(details, err => {
+      ReactNativePayments.handleDetailsUpdate(details, invalidShippingAddress, err => {
         if (err) return reject(err);
 
         resolve();
