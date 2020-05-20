@@ -85,6 +85,12 @@ export function convertDetailAmountsToString(
       });
     }
 
+    if (key === 'invalidShipping') {
+      return Object.assign({}, acc, {
+        [key]: details[key]
+      });
+    }
+
     return acc;
   }, {});
 
