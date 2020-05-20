@@ -113,8 +113,7 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
     NSArray<PKShippingMethod *> * shippingMethods = [self getShippingMethodsFromDetails:details];
     
     NSArray<PKPaymentSummaryItem *> * paymentSummaryItems = [self getPaymentSummaryItemsFromDetails:details];
-    
-    
+
     if (self.shippingMethodCompletion) {
         self.shippingMethodCompletion(
                                       PKPaymentAuthorizationStatusSuccess,
@@ -127,7 +126,7 @@ RCT_EXPORT_METHOD(handleDetailsUpdate: (NSDictionary *)details
     
     if (self.shippingContactCompletion) {
         // Display shipping address error when shipping is needed and shipping method count is below 1
-        if (self.initialOptions[@"requestShipping"] && [shippingMethods count] == 0) {
+        if ((self.initialOptions[@"requestShipping"] && [shippingMethods count] == 0) || [details[@"invalidShipping"] boolValue]) {
             return self.shippingContactCompletion(
                                                   PKPaymentAuthorizationStatusInvalidShippingPostalAddress,
                                                   shippingMethods,

@@ -16,7 +16,8 @@ export type PaymentCurrencyAmount = {
 export type PaymentDetailsBase = {
   displayItems: Array<PaymentItem>,
   shippingOptions: Array<PaymentShippingOption>,
-  modifiers: Array<PaymentDetailsModifier>
+  modifiers: Array<PaymentDetailsModifier>,
+  invalidShipping?: boolean
 };
 
 // https://www.w3.org/TR/payment-request/#paymentdetailsinit-dictionary
