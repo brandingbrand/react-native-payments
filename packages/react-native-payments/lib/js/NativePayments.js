@@ -16,6 +16,7 @@ const NativePayments: {
   show: () => Promise<any>,
   abort: () => Promise<any>,
   complete: PaymentComplete => Promise<any>,
+  openPaymentSetup: () => Promise<any>,
   getFullWalletAndroid: string => Promise<any>
 } = {
   supportedGateways: IS_ANDROID
@@ -145,6 +146,23 @@ const NativePayments: {
       }
 
       ReactNativePayments.complete(paymentStatus, err => {
+        if (err) return reject(err);
+
+        resolve(true);
+      });
+    });
+  },
+
+  openPaymentSetup() {
+    return new Promise((resolve, reject) => {
+      if (IS_ANDROID) {
+        // TODO
+        resolve(undefined);
+
+        return;
+      }
+
+      ReactNativePayments.openPaymentSetup(err => {
         if (err) return reject(err);
 
         resolve(true);
