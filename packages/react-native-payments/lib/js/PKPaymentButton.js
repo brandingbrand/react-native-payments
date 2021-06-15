@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { NativeModules, requireNativeComponent } from 'react-native';
+import PaymentRequest from './PaymentRequest';
 
 type PKPaymentButtonType =
   // A button with the Apple Pay logo only.
@@ -29,6 +30,7 @@ type Props = $Exact<{
   width?: number,
   height?: number,
   onPress: Function,
+  supportedNetworks?: string[]
 }>;
 
 const RNPKPaymentButton = requireNativeComponent('PKPaymentButton', null, {
@@ -46,12 +48,32 @@ export class PKPaymentButton extends React.Component<Props> {
     height: 44,
   };
 
+  state = {
+    defaultToSetup: false
+  }
+
+  async componentDidMount() {
+    const { supportedNetworks: customNetworks } = this.props;
+    let supportedNetworks = customNetworks;
+    if (supportedNetworks.length === 0) {
+      supportedNetworks = await PaymentRequest.availableNetworks();
+    }
+    const havePaymentSetup =
+      await PaymentRequest.canMakePaymentsUsingNetworks(supportedNetworks);
+    if (!havePaymentSetup) {
+      this.setState({ defaultToSetup: true })
+    }
+  }
+
   render() {
+    const { defaultToSetup } = this.state;
+    const buttonType = defaultToSetup ? 'setUp' : this.props.type;
+    const onPress = defaultToSetup ? PaymentRequest.openPaymentSetup : this.props.onPress;
     return (
       <RNPKPaymentButton
         buttonStyle={this.props.style}
-        buttonType={this.props.type}
-        onPress={this.props.onPress}
+        buttonType={buttonType}
+        onPress={onPress}
         width={this.props.width}
         height={this.props.height}
       />

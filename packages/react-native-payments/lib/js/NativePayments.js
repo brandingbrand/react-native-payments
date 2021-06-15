@@ -16,6 +16,7 @@ const NativePayments: {
   show: () => Promise<any>,
   abort: () => Promise<any>,
   complete: PaymentComplete => Promise<any>,
+  availableNetworks: () => Promise<string[] | boolean>,
   getFullWalletAndroid: string => Promise<any>
 } = {
   supportedGateways: IS_ANDROID
@@ -149,6 +150,18 @@ const NativePayments: {
 
         resolve(true);
       });
+    });
+  },
+
+  availableNetworks() {
+    return new Promise((resolve) => {
+      if (IS_ANDROID) {
+        resolve(false);
+      }
+
+      ReactNativePayments.availableNetworks(
+        (err, data) => resolve(data)
+      );
     });
   },
 
